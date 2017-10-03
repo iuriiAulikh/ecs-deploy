@@ -381,7 +381,7 @@ function waitForGreenDeployment {
   echo "Waiting for service deployment to complete..."
   while [ $i -lt $TIMEOUT ]
   do
-    NUM_DEPLOYMENTS=$($AWS_ECS describe-services --services $SERVICE --cluster $CLUSTER | jq "[.services[].deployments[]] | length")
+    NUM_DEPLOYMENTS=$($AWS_ECS describe-services --region $AWS_DEFAULT_REGION --services $SERVICE --cluster $CLUSTER | jq "[.services[].deployments[]] | length")
 
     # Wait to see if more than 1 deployment stays running
     # If the wait time has passed, we need to roll back
